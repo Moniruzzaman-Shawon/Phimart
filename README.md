@@ -1,4 +1,3 @@
-# Phimart
 # Phimart E-commerce Project
 
 Phimart is a full-featured e-commerce platform with RESTful APIs built using Django REST Framework. It supports user authentication, product and category management, shopping carts, orders, and admin dashboards.
