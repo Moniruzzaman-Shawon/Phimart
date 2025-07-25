@@ -155,7 +155,7 @@ Phimart is a full-featured e-commerce platform with RESTful APIs built using Dja
 
 ---
 
-## Getting Started
+## Getting Started With The Project
 
 ### Installation
 
