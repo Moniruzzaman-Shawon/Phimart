@@ -163,3 +163,30 @@ Phimart is a full-featured e-commerce platform with RESTful APIs built using Dja
    ```bash
    git clone https://github.com/Moniruzzaman-Shawon/Phimart.git
    cd Phimart
+   ````
+2. Create and activate a virtual environment
+````
+python -m venv .env
+# Windows PowerShell
+.\.env\Scripts\Activate.ps1
+# macOS/Linux
+source .env/bin/activate
+````
+3. Install dependencies
+````
+pip install -r requirements.txt
+````
+4. Run migrations
+
+````
+python manage.py migrate
+````
+5. Create superuser (optional)
+````
+python manage.py createsuperuser
+
+````
+6. Start development server
+````
+python manage.py runserver
+````
