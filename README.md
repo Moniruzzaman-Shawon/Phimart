@@ -187,3 +187,15 @@ python manage.py createsuperuser
 ````
 python manage.py runserver
 ````
+
+
+## Usage
+Access the API at http://localhost:8000/api/
+
+Use an API client like Postman or the DRF browsable API to interact with endpoints
+
+Use JWT tokens to authenticate protected endpoints
+
+
+## License
+MIT License © 2025 Moniruzzaman Shawon
