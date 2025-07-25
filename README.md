@@ -166,20 +166,23 @@ Phimart is a full-featured e-commerce platform with RESTful APIs built using Dja
    ````
 2. Create and activate a virtual environment
 ````
-python -m venv .env
-# Windows PowerShell
-.\.env\Scripts\Activate.ps1
-# macOS/Linux
-source .env/bin/activate
+python -m venv .env # To create virual environment
+
+.\.env\Scripts\Activate # Windows PowerShell
+
+source .env/bin/activate # macOS/Linux
+
 ````
 3. Install dependencies
 ````
 pip install -r requirements.txt
+
 ````
 4. Run migrations
 
 ````
 python manage.py migrate
+
 ````
 5. Create superuser (optional)
 ````
@@ -189,4 +192,5 @@ python manage.py createsuperuser
 6. Start development server
 ````
 python manage.py runserver
+
 ````
