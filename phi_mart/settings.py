@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-l4!21*=cv7gaxmqs89yfn=ptr9a91=!$@*b)a-qef4-i((1-wf
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+AUTH_USER_MODEL = 'users.User'
 
 # Application definition
 
@@ -42,9 +42,11 @@ INSTALLED_APPS = [
     'users',
     'order',
     'product',
+    "debug_toolbar",
 ]
 
 MIDDLEWARE = [
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -72,6 +74,12 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'phi_mart.wsgi.application'
+
+INTERNAL_IPS = [
+    # ...
+    "127.0.0.1",
+    # ...
+]
 
 
 # Database
