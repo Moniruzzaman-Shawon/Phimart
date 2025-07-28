@@ -36,9 +36,9 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = ["id", "name", 'description', 'price', 'stock', 'category', 'price_with_tax']
 
     price_with_tax = serializers.SerializerMethodField(method_name='calculate_tax')
-    category = serializers.HyperlinkedRelatedField(
-    queryset = Category.objects.all(),
-        view_name =  'view-specific-category')
+    # category = serializers.HyperlinkedRelatedField(
+    # queryset = Category.objects.all(),
+    #     view_name =  'view-specific-category')
     def calculate_tax(self, product):
         return round(product.price * Decimal(1.1) , 2)
 
