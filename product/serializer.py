@@ -7,7 +7,7 @@ class CategorySerializer(serializers.ModelSerializer):
         model = Category
         fields = ['id', 'name', 'description', 'product_count']    
 
-    product_count = serializers.IntegerField()
+    product_count = serializers.IntegerField(read_only=True)
 
 # class ProductSerializer(serializers.Serializer):
 #     id = serializers.IntegerField()
@@ -41,5 +41,12 @@ class ProductSerializer(serializers.ModelSerializer):
     #     view_name =  'view-specific-category')
     def calculate_tax(self, product):
         return round(product.price * Decimal(1.1) , 2)
+    
+    def validate_price(self,price):
+        if price < 0:
+            raise serializers.ValidationError('Price could not be negative')
+        return price
 
-
+    # def validate(self, attrs):
+    #     if attrs['password1'] != attrs['password2']:
+    #         raise serializers.ValidationError("Password does not match")
