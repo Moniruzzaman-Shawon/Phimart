@@ -31,3 +31,10 @@ class Review(models.Model):
     name = models.CharField(max_length=250)
     description = models.TextField()
     date = models.DateField(auto_now_add=True)
+
+
+# Step to build API
+    # Model
+    # Serializer
+    # Viewset
+    # Router
