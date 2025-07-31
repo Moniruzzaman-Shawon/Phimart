@@ -28,6 +28,11 @@ class AddCartItemSerializer(serializers.ModelSerializer):
             self.instance = CartItem.objects.create(cart_id=cart_id, **self.validated_data)
 
         return self.instance
+    
+    def validate_product_id(self,value):
+        if not Product.objects.filter(pk=value).exists():
+            raise serializers.ValidationError(f'Product with id {value} does not exist')
+        return value
 
 class CartItemSerializer(serializers.ModelSerializer):
     product = SimpleProductSerializer()
@@ -39,7 +44,10 @@ class CartItemSerializer(serializers.ModelSerializer):
     def get_total_price(self, cart_item:CartItem):
         return cart_item.quantity * cart_item.product.price
 
-
+class UpdateCartItemSerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = CartItem
+        fields = [ 'quantity']
 
 class CartSerializer(serializers.ModelSerializer):
     items = CartItemSerializer(many=True, read_only=True)
