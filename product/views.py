@@ -9,11 +9,15 @@ from django.db.models import Count
 from rest_framework.views import APIView
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.viewsets import ModelViewSet
+from product.pagination import DefaultPagination
 # Create your views here.
 
 class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+
+    pagination_class = DefaultPagination
+
 
     def destroy(self, request, *args, **kwargs):
         product = self.get_object()
