@@ -10,6 +10,8 @@ from rest_framework.views import APIView
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from rest_framework.viewsets import ModelViewSet
 from product.pagination import DefaultPagination
+from rest_framework.permissions import IsAdminUser, AllowAny
+from api.permissions import IsAdminOrReadOnly
 # Create your views here.
 
 class ProductViewSet(ModelViewSet):
@@ -17,7 +19,14 @@ class ProductViewSet(ModelViewSet):
     serializer_class = ProductSerializer
 
     pagination_class = DefaultPagination
+    # permission_classes = [IsAdminUser]
+    permission_classes = [IsAdminOrReadOnly]
 
+
+    # def get_permissions(self):
+    #     if self.request.method == 'GET':
+    #         return [AllowAny()]
+    #     return [IsAdminUser()]
 
     def destroy(self, request, *args, **kwargs):
         product = self.get_object()
@@ -51,6 +60,7 @@ class ProductDetails(RetrieveUpdateDestroyAPIView):
 #     return Response(serilizer.data)
 
 class CategoryViewSet(ModelViewSet):
+    permission_classes = [IsAdminOrReadOnly]
     queryset = Category.objects.annotate(product_count = Count('products')).all()
     serializer_class = CategorySerializer
 
