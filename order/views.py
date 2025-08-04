@@ -40,6 +40,9 @@ class OrderViewSet(ModelViewSet):
             return CreateOrderSerializer
         return OrderSerializer
 
+    def get_serializer_context(self):
+        return {'user_id': self.request.user.id}
+
     def get_queryset(self):
         if self.request.user.is_staff :
             return Order.objects.prefetch_related('items__product').all()
