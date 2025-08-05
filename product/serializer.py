@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from decimal import Decimal
-from product.models import Category, Product, Review
+from product.models import Category, Product, Review, ProductImage
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -8,26 +8,7 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'description', 'product_count']    
 
     product_count = serializers.IntegerField(read_only=True)
-
-# class ProductSerializer(serializers.Serializer):
-#     id = serializers.IntegerField()
-#     name = serializers.CharField()
-#     unit_price = serializers.DecimalField(max_digits=10, decimal_places=2, source = 'price') #source for identify, now I can change 'price_name'
-
-#     price_with_tax = serializers.SerializerMethodField(method_name='calculate_tax')
-#     # category = serializers.PrimaryKeyRelatedField(
-#     #     queryset = Category.objects.all()
-#     # )
-#     # category = serializers.StringRelatedField()
-#     # category = CategorySerializer()
-#     category = serializers.HyperlinkedRelatedField(
-#         queryset = Category.objects.all(),
-#         view_name =  'view-specific-category'
-#     )
-
-#     def calculate_tax(self,product):
-#         return round(product.price * Decimal(1.1), 2)
-    
+ 
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
@@ -51,6 +32,10 @@ class ProductSerializer(serializers.ModelSerializer):
     #     if attrs['password1'] != attrs['password2']:
     #         raise serializers.ValidationError("Password does not match")
 
+class ProductImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductImage
+        fields = ['id','image']
 
 class ReviewSerializer(serializers.ModelSerializer):
 
