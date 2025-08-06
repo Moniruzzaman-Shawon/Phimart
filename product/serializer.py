@@ -8,13 +8,18 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'description', 'product_count']    
 
     product_count = serializers.IntegerField(read_only=True)
- 
+
+class ProductImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductImage
+        fields = ['id','image'] 
 
 class ProductSerializer(serializers.ModelSerializer):
+    images = ProductImageSerializer(many=True, read_only=True)
     class Meta:
         model = Product
         # ---- fields = '__all__' # to show all fields (but not recommended)
-        fields = ["id", "name", 'description', 'price', 'stock', 'category', 'price_with_tax']
+        fields = ["id", "name", 'description', 'price', 'stock', 'category', 'price_with_tax', 'images']
 
     price_with_tax = serializers.SerializerMethodField(method_name='calculate_tax')
     # category = serializers.HyperlinkedRelatedField(
@@ -32,10 +37,7 @@ class ProductSerializer(serializers.ModelSerializer):
     #     if attrs['password1'] != attrs['password2']:
     #         raise serializers.ValidationError("Password does not match")
 
-class ProductImageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ProductImage
-        fields = ['id','image']
+
 
 class ReviewSerializer(serializers.ModelSerializer):
 
