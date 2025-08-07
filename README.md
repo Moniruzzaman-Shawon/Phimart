@@ -155,6 +155,21 @@ Phimart is a full-featured e-commerce platform with RESTful APIs built using Dja
 
 ## Getting Started With The Project
 
+### API Documentation
+Swagger documentation is available at:
+
+http://127.0.0.1:8000/swagger/
+
+Redoc documentation is available at:
+
+http://127.0.0.1:8000//swagger/
+
+### Environmental Variables
+Create a `.env` file in the root directory and add the follwong:
+````
+
+````
+
 ### Installation
 
 1. Clone the repo  
