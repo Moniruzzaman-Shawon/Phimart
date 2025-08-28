@@ -30,7 +30,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles', 
-    'drf_yasg',  
+    'drf_yasg', 
+    "django_filters", 
     "corsheaders",
     'rest_framework',
     'djoser',
@@ -42,16 +43,29 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    # CORS headers should be at the top
     "corsheaders.middleware.CorsMiddleware",
+
+    # Django debug toolbar (if used)
     "debug_toolbar.middleware.DebugToolbarMiddleware",
-    'django.middleware.security.SecurityMiddleware',
+
+    # Security & static files
+    "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # Default session and common middlewares
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+
+    # CSRF protection
+    "django.middleware.csrf.CsrfViewMiddleware",
+
+    # Authentication & messages
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+
+    # Clickjacking protection
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
 ROOT_URLCONF = 'phi_mart.urls'

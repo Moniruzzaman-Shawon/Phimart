@@ -14,23 +14,32 @@ from rest_framework.permissions import IsAdminUser, AllowAny
 from api.permissions import IsAdminOrReadOnly, FullDjangoModelPermission
 from rest_framework.permissions import DjangoModelPermissions, DjangoModelPermissionsOrAnonReadOnly
 from product.permissions import IsReviewAuthorOrReadonly
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter, OrderingFilter
+
 # Create your views here.
 
 class ProductViewSet(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
-
     pagination_class = DefaultPagination
-    # permission_classes = [IsAdminUser]
     permission_classes = [IsAdminOrReadOnly]
-    # permission_classes = [DjangoModelPermissions]
-    # permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
 
+    # add filtering, searching, ordering
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
 
-    # def get_permissions(self):
-    #     if self.request.method == 'GET':
-    #         return [AllowAny()]
-    #     return [IsAdminUser()]
+    # 🔹 Filtering by category and price
+    filterset_fields = {
+        "category": ["exact"],          # ?category=1
+        "price": ["gte", "lte"],        # ?price__gte=100&price__lte=500
+    }
+
+    # 🔹 Searching by product name or description
+    search_fields = ["name", "description"]  # ?search=laptop
+
+    # 🔹 Sorting by price (asc/desc)
+    ordering_fields = ["price", "created_at"]  # ?ordering=price or ?ordering=-price
+    ordering = ["id"]  # default ordering
 
 
 class ProductImageViewSet(ModelViewSet):
