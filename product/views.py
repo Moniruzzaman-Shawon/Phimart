@@ -25,22 +25,21 @@ class ProductViewSet(ModelViewSet):
     pagination_class = DefaultPagination
     permission_classes = [IsAdminOrReadOnly]
 
-    # add filtering, searching, ordering
+    # Enable filtering, searching, ordering
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
 
-    # 🔹 Filtering by category and price
+    # Filter fields
     filterset_fields = {
-        "category": ["exact"],          # ?category=1
-        "price": ["gte", "lte"],        # ?price__gte=100&price__lte=500
+        "price": ["gte", "lte"],  # allows ?price__gte=100&price__lte=500
+        "category": ["exact"],    # allows ?category=1
     }
 
-    # 🔹 Searching by product name or description
+    # Search fields
     search_fields = ["name", "description"]  # ?search=laptop
 
-    # 🔹 Sorting by price (asc/desc)
+    # Sorting fields
     ordering_fields = ["price", "created_at"]  # ?ordering=price or ?ordering=-price
-    ordering = ["id"]  # default ordering
-
+    ordering = ["id"]
 
 class ProductImageViewSet(ModelViewSet):
     serializer_class = ProductImageSerializer
