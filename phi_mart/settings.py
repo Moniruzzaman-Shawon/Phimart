@@ -205,11 +205,21 @@ SIMPLE_JWT = {
    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
 }
 DJOSER = {
+    'EMAIL_FRONTEND_PROTOCOL' : config('FRONTEND_PROTOCOL'),
+    'EMAIL_FRONTEND_DOMAIN' : config('FRONTEND_DOMAIN'),
+    'EMAIL_FRONTEND_SITE_NAME' : 'PhiMart',
     'SERIALIZERS': {  
         'user_create': 'users.serializers.UserCreateSerializer',
         'current_user': 'users.serializers.UserSerializer',
-
-    }
+        'password_reset': 'djoser.serializers.PasswordResetSerializer',
+        'password_reset_confirm': 'djoser.serializers.PasswordResetConfirmSerializer',
+        'set_password': 'djoser.serializers.SetPasswordSerializer',
+    },
+    'SEND_ACTIVATION_EMAIL': False,
+    'PASSWORD_RESET_CONFIRM_URL': 'password/reset/confirm/{uid}/{token}/',
+    'USERNAME_RESET_EMAIL': False,
+    'ACTIVATION_URL': 'activate/{uid}/{token}/',
+    'TOKEN_MODEL': None,
 }
 
 
