@@ -158,7 +158,7 @@ Phimart is a full-featured e-commerce platform with RESTful APIs built using Dja
 ### API Documentation
 Swagger documentation is available at:
 
-http://127.0.0.1:8000/swagger/
+[https://phimart-kappa.vercel.app/swagger/](https://phimart-kappa.vercel.app/swagger/)
 
 Redoc documentation is available at:
 
