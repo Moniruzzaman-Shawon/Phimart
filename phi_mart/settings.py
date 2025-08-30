@@ -2,6 +2,8 @@ from pathlib import Path
 from datetime import timedelta
 from decouple import config
 import cloudinary
+import os
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -130,6 +132,16 @@ cloudinary.config(
     secure=True
 )
 
+# Email Host
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = config("EMAIL_HOST")
+EMAIL_PORT = int(config("EMAIL_PORT", 587))
+EMAIL_USE_TLS = config("EMAIL_USE_TLS", cast=bool)
+EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
+DEFAULT_FROM_EMAIL = config("DEFAULT_FROM_EMAIL")
+
+
 # Media Storage settings
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
@@ -199,3 +211,5 @@ DJOSER = {
 
     }
 }
+
+
