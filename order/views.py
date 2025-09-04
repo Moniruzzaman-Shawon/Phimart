@@ -64,7 +64,7 @@ class OrderViewSet(ModelViewSet):
         return Order.objects.prefetch_related('items__product').filter(user = self.request.user)
     
 
-@api_view(['GET','POST'])
+@api_view(['POST'])
 def initiate_payment(request):
     user = request.user
     amount = request.data.get("amount")
